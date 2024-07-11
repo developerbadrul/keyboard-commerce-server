@@ -29,7 +29,7 @@ const getAllProductFromDb = async (search: string, minPrice: number | null, maxP
         sortOption.price = -1
     }
 
-    console.log("query in service",query);
+    // console.log("query in service",query);
 
 
     const result = await ProductsModal.find(query).sort(sortOption)
