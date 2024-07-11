@@ -7,7 +7,19 @@ import sendResponse from "../../utils/sendResponse";
 const getAllProducts: RequestHandler = async (req, res, next) => {
 
     try {
-        const products = await ProductService.getAllProductFromDb()
+        const { search, minPrice, maxPrice, sort } = req.query;
+        
+        console.log(req.query);
+        console.log("search", search, minPrice, maxPrice, sort);
+
+
+        const products = await ProductService.getAllProductFromDb(
+            search as string,
+            minPrice ? parseFloat(minPrice as string) : null,
+            maxPrice ? parseFloat(maxPrice as string) : null,
+            sort as string
+        )
+
         sendResponse(res,
             {
                 success: true,

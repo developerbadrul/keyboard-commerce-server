@@ -4,6 +4,7 @@ import router from "./app/routes";
 import httpStatus from "http-status";
 import globalErrorHandaler from "./app/middlewares/globalErrorHandaler";
 import AppError from "./app/errors/AppError";
+import config from "./app/config";
 
 
 
@@ -20,7 +21,7 @@ app.use(cors());
 app.use("/api", router)
 
 app.get("/", (req: Request, res: Response) => {
-    res.json("Hello World")
+    res.json(`keyboard server is running port: ${config.port ?? process.env.PORT}`)
 })
 
 

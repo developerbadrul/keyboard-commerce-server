@@ -1,0 +1,62 @@
+[
+    {
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "phoneNumber": "+1234567890",
+        "deliveryAddress": {
+            "street": "123 Main St",
+            "city": "Anytown",
+            "state": "CA",
+            "postalCode": "12345",
+            "country": "USA"
+        }
+    },
+    {
+        "name": "Jane Smith",
+        "email": "jane.smith@example.com",
+        "phoneNumber": "+0987654321",
+        "deliveryAddress": {
+            "street": "456 Oak Ave",
+            "city": "Somewhere",
+            "state": "TX",
+            "postalCode": "67890",
+            "country": "USA"
+        }
+    },
+    {
+        "name": "Alice Johnson",
+        "email": "alice.johnson@example.com",
+        "phoneNumber": "+1122334455",
+        "deliveryAddress": {
+            "street": "789 Pine Rd",
+            "city": "Elsewhere",
+            "state": "NY",
+            "postalCode": "10112",
+            "country": "USA"
+        }
+    },
+    {
+        "name": "Bob Brown",
+        "email": "bob.brown@example.com",
+        "phoneNumber": "+1222333444",
+        "deliveryAddress": {
+            "street": "321 Elm St",
+            "city": "Anywhere",
+            "state": "FL",
+            "postalCode": "13141",
+            "country": "USA"
+        }
+    },
+    {
+        "name": "Charlie Davis",
+        "email": "charlie.davis@example.com",
+        "phoneNumber": "+1555666777",
+        "deliveryAddress": {
+            "street": "654 Spruce St",
+            "city": "Uptown",
+            "state": "IL",
+            "postalCode": "15161",
+            "country": "USA"
+        }
+    }
+]
