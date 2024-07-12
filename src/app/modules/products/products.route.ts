@@ -19,6 +19,12 @@ router.put(
     ProductController.updateProduct
 )
 
+// update product 
+router.delete(
+    "/:id",
+    ProductController.deleteProduct
+)
+
 
 
 export const ProductsRoute = router;

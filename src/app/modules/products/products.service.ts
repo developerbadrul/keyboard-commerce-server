@@ -4,9 +4,9 @@ import { ProductsModal } from "./products.model"
 
 
 const getAllProductFromDb = async (search: string, minPrice: number | null, maxPrice: number | null, sort: string) => {
-    const query: any = {};
+    const query: any = { isDelete: false };
 
-    //search by name & brand
+    // Search by name & brand
     if (search) {
         query.$or = [
             { title: { $regex: search, $options: "i" } },
@@ -14,27 +14,25 @@ const getAllProductFromDb = async (search: string, minPrice: number | null, maxP
         ];
     }
 
-    //Filter by price range
+    // Filter by price range
     if (minPrice != null || maxPrice != null) {
         query.price = {};
         if (minPrice != null) query.price.$gte = minPrice;
         if (maxPrice != null) query.price.$lte = maxPrice;
     }
 
-    //sorting by price
+    // Sorting by price
     let sortOption: any = {};
     if (sort === "priceAsc") {
         sortOption.price = 1;
     } else if (sort === "priceDesc") {
-        sortOption.price = -1
+        sortOption.price = -1;
     }
 
-    // console.log("query in service",query);
+    const result = await ProductsModal.find(query).sort(sortOption).select({isDelete: false});
+    return result;
+};
 
-
-    const result = await ProductsModal.find(query).sort(sortOption)
-    return result
-}
 
 
 const addNewProductInDb = async (product: TProducts) => {
@@ -50,8 +48,14 @@ const updateProductInDb = async (productId: string, updateData: Partial<TProduct
     return result
 }
 
+const deleteProductFromDb = (prductId: string) => {
+    const result = ProductsModal.findByIdAndUpdate(prductId, { isDelete: true }, { new: true })
+    return result
+}
+
 export const ProductService = {
     getAllProductFromDb,
     addNewProductInDb,
-    updateProductInDb
+    updateProductInDb,
+    deleteProductFromDb
 }

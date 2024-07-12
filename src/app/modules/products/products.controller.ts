@@ -59,10 +59,10 @@ const updateProduct: RequestHandler = async (req, res, next) => {
     try {
         const products = await ProductService.updateProductInDb(id, req.body)
 
-        if(!products){
+        if (!products) {
             throw new AppError(NOT_FOUND, "product not found")
         }
-        
+
         sendResponse(res,
             {
                 success: true,
@@ -76,10 +76,35 @@ const updateProduct: RequestHandler = async (req, res, next) => {
     }
 }
 
+const deleteProduct: RequestHandler = async (req, res, next) => {
+
+    const { id } = req.params;
+
+    try {
+        const products = await ProductService.deleteProductFromDb(id)
+
+        if (!products) {
+            throw new AppError(NOT_FOUND, "product not found")
+        }
+
+        sendResponse(res,
+            {
+                success: true,
+                statusCode: httpStatus.CREATED,
+                message: "Product Delete Successfully",
+                data: products
+            }
+        )
+    } catch (error) {
+        next(error);
+    }
+}
+
 
 
 export const ProductController = {
     getAllProducts,
     addNewProduct,
-    updateProduct
+    updateProduct,
+    deleteProduct
 }

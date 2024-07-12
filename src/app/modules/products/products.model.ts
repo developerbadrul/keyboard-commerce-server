@@ -22,7 +22,7 @@ const productsSchema = new Schema<TProducts>({
     isDelete: {
         type: Boolean,
         default: false,
-        required: true
+        required: true,
     },
     price: {
         type: Number,
