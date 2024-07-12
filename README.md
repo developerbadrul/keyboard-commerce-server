@@ -1,19 +1,11 @@
 
-
-# Keyboard Commerce Server
-
-This repository contains the backend server implementation for Keyboard Commerce, providing APIs to manage products and orders.
-
-markdown
 <div align="center">
   <h1>Keyboard Commerce Server</h1>
 </div>
 
 ---
 
-# Project Name
-
-Keyboard Commerce Server
+# Project Name : Keyboard Commerce Server
 
 ## Introduction
 
