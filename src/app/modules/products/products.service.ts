@@ -1,4 +1,3 @@
-import { demoProducts } from "../../fakeData/demodata"
 import { TProducts } from "./products.interface"
 import { ProductsModal } from "./products.model"
 

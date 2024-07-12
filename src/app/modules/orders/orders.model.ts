@@ -14,6 +14,19 @@ const orderSchema = new Schema<TOrder>({
     name: { type: String, required: true },
     email: { type: String, required: true },
     phoneNumber: { type: String, required: true },
+    orderItem: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "product",
+            required: true
+        }
+    ],
+    status: {
+        type: String,
+        enum: ["confirmed", "in process"],
+        default: "in process",
+        required: true
+    },
     deliveryAddress: { type: addressSchema, required: true }
 }, { timestamps: true });
 

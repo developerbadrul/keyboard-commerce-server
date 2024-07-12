@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 
 
 export interface TAddress {
@@ -13,5 +14,7 @@ export interface TOrder {
     name: string;
     email: string;
     phoneNumber: string,
+    orderItem: Types.ObjectId[]
+    status: "confirmed" | "in process";
     deliveryAddress: TAddress
 }
