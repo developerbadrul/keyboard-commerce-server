@@ -11,10 +11,17 @@ router.post(
     validateRequest(OrderValidation.orderValidationSchema, "body"),
     OrderController.addNewOrder
 )
-// get orders
+
+// get all orders
 router.get(
     "/",
     OrderController.getAllOrder
+)
+
+// change order status
+router.put(
+    "/:orderId",
+    OrderController.updateOrderStatus
 )
 
 

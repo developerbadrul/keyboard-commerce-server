@@ -39,9 +39,26 @@ const getAllOrder: RequestHandler = async (req, res, next) => {
 }
 
 
+const updateOrderStatus: RequestHandler = async (req, res, next) => {
+    const { orderId } = req.params;
+    try {
 
+        const updatedOrder = await OrderService.updateOrderStatusFromDb(orderId);
+
+        sendResponse(res, {
+            success: true,
+            statusCode: httpStatus.OK,
+            message: `Order Confirmed`,
+            data: updatedOrder,
+        }
+        )
+    } catch (error) {
+        next(error);
+    }
+}
 
 export const OrderController = {
     addNewOrder,
-    getAllOrder
+    getAllOrder,
+    updateOrderStatus
 }

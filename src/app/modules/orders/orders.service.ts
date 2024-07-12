@@ -49,7 +49,41 @@ const getAllOrderFromDb = async () => {
 }
 
 
+const updateOrderStatusFromDb = async (orderId: string) => {
+    try {
+        // Check if order exists
+        const order = await OrderModel.findById(orderId);
+        if (!order) {
+            throw new AppError(httpStatus.NOT_FOUND, "Order not found");
+        }
+
+        // Check if order is already confirmed
+        if (order.status === "confirmed") {
+            throw new AppError(httpStatus.BAD_REQUEST, "Order is already confirmed");
+        }
+
+        // Update order status
+        const updatedOrder = await OrderModel.findByIdAndUpdate(
+            orderId,
+            { status: "confirmed" },
+            { new: true }
+        );
+
+        if (!updatedOrder) {
+            throw new AppError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to update order status");
+        }
+
+        return updatedOrder;
+    } catch (error) {
+        throw new AppError(httpStatus.INTERNAL_SERVER_ERROR, "Order is already confirmed");
+    }
+};
+
+
+
+
 export const OrderService = {
     addNewOrderInDb,
-    getAllOrderFromDb
+    getAllOrderFromDb,
+    updateOrderStatusFromDb
 }
