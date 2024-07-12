@@ -45,7 +45,13 @@ const addNewProductInDb = async (product: TProducts) => {
 }
 
 
+const updateProductInDb = async (productId: string, updateData: Partial<TProducts>) => {
+    const result = await ProductsModal.findByIdAndUpdate(productId, updateData, { new: true });
+    return result
+}
+
 export const ProductService = {
     getAllProductFromDb,
-    addNewProductInDb
+    addNewProductInDb,
+    updateProductInDb
 }

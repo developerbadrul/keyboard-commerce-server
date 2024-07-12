@@ -1,14 +1,15 @@
 import { RequestHandler } from "express";
 import { ProductService } from "./products.service";
-import httpStatus from "http-status";
+import httpStatus, { NOT_FOUND } from "http-status";
 import sendResponse from "../../utils/sendResponse";
+import AppError from "../../errors/AppError";
 
 
 const getAllProducts: RequestHandler = async (req, res, next) => {
 
     try {
         const { search, minPrice, maxPrice, sort } = req.query;
-        
+
         console.log(req.query);
         console.log("search", search, minPrice, maxPrice, sort);
 
@@ -51,9 +52,34 @@ const addNewProduct: RequestHandler = async (req, res, next) => {
     }
 }
 
+const updateProduct: RequestHandler = async (req, res, next) => {
+
+    const { id } = req.params;
+
+    try {
+        const products = await ProductService.updateProductInDb(id, req.body)
+
+        if(!products){
+            throw new AppError(NOT_FOUND, "product not found")
+        }
+        
+        sendResponse(res,
+            {
+                success: true,
+                statusCode: httpStatus.CREATED,
+                message: "Product Update Successfully",
+                data: products
+            }
+        )
+    } catch (error) {
+        next(error);
+    }
+}
+
 
 
 export const ProductController = {
     getAllProducts,
     addNewProduct,
+    updateProduct
 }

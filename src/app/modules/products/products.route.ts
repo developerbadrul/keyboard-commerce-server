@@ -12,6 +12,13 @@ router.get("/", ProductController.getAllProducts)
 // post products 
 router.post("/", validateRequest(ProductValidation.ProductValidationSchema, "body"), ProductController.addNewProduct)
 
+// update product 
+router.put(
+    "/:id",
+    validateRequest(ProductValidation.ProductUpdateValidationSchema, "body"),
+    ProductController.updateProduct
+)
+
 
 
 export const ProductsRoute = router;

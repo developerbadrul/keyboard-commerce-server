@@ -5,6 +5,7 @@ export interface TProducts {
     title: string;
     brand: string;
     availableQuantity: number;
+    isDelete: boolean;
     price: number;
     rating: number;
     description: string;

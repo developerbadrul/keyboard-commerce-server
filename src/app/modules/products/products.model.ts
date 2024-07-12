@@ -1,5 +1,6 @@
 import mongoose, { Model, Schema } from "mongoose";
 import { TProducts } from "./products.interface";
+import { boolean } from "zod";
 
 const productsSchema = new Schema<TProducts>({
     image: {
@@ -16,6 +17,11 @@ const productsSchema = new Schema<TProducts>({
     },
     availableQuantity: {
         type: Number,
+        required: true
+    },
+    isDelete: {
+        type: Boolean,
+        default: false,
         required: true
     },
     price: {
