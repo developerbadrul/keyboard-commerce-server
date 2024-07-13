@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Commerce Server API Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        h2 {
+            margin-bottom: 10px;
+        }
+        h3 {
+            margin-bottom: 5px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f8f8f8;
+            padding: 10px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        .endpoint {
+            margin-bottom: 20px;
+        }
+        .endpoint-details {
+            margin-left: 20px;
+        }
+        .response {
+            margin-top: 10px;
+        }
+        .api-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .api-table th, .api-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .api-table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Keyboard Commerce Server API Documentation</h1>
+        </div>
+
+        <h2>API Overview</h2>
+        <table class="api-table">
+            <thead>
+                <tr>
+                    <th>Endpoint</th>
+                    <th>Description</th>
+                    <th>Method</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>/api/products</td>
+                    <td>Get all products</td>
+                    <td>GET</td>
+                </tr>
+                <tr>
+                    <td>/api/products</td>
+                    <td>Add new product</td>
+                    <td>POST</td>
+                </tr>
+                <tr>
+                    <td>/api/products/:id</td>
+                    <td>Update product</td>
+                    <td>PUT</td>
+                </tr>
+                <tr>
+                    <td>/api/products/:id</td>
+                    <td>Delete product</td>
+                    <td>DELETE</td>
+                </tr>
+                <tr>
+                    <td>/api/products/?search=query</td>
+                    <td>Search and filter products</td>
+                    <td>GET</td>
+                </tr>
+                <tr>
+                    <td>/api/order</td>
+                    <td>Get all orders</td>
+                    <td>GET</td>
+                </tr>
+                <tr>
+                    <td>/api/order</td>
+                    <td>Add new order</td>
+                    <td>POST</td>
+                </tr>
+                <tr>
+                    <td>/api/order/:id</td>
+                    <td>Update order status</td>
+                    <td>PUT</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="endpoint">
+            <h2>Product Search & Filter</h2>
+            <div class="endpoint-details">
+                <h3>Endpoint</h3>
+                <code>{{LiveBaseURL}}/api/products/?search=query</code>
+                <h3>Request Method</h3>
+                <code>GET</code>
+                <h3>Response</h3>
+                <pre><code class="json">{
+    "success": true,
+    "statusCode": 200,
+    "message": "All Product Retrieved",
+    "data": [
+        {
+            "_id": "66914fb7f1ed9dbc761c38ee",
+            "image": "https://example.com/image1.jpg",
+            "title": "Mechanical Gaming Keyboard",
+            "brand": "KeyMaster",
+            "availableQuantity": 49,
+            "price": 99.99,
+            "rating": 4.5,
+            "description": "A high-performance mechanical keyboard with RGB lighting and programmable keys.",
+            "__v": 0
+        }
+    ]
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <h2>Update Product</h2>
+            <div class="endpoint-details">
+                <h3>Endpoint</h3>
+                <code>{{LiveBaseURL}}/api/products/:id</code>
+                <h3>Request Method</h3>
+                <code>PUT</code>
+                <h3>Request Body</h3>
+                <pre><code class="json">{
+    "title": "RGB Backlit Keyboard 5",
+    "brand": "Bangla 2",
+    "availableQuantity": 20
+}</code></pre>
+                <h3>Response</h3>
+                <pre><code class="json">{
+    "success": true,
+    "statusCode": 201,
+    "message": "Product Update Successfully",
+    "data": {
+        "_id": "66914fc8f1ed9dbc761c38f0",
+        "image": "https://example.com/image2.jpg",
+        "title": "RGB Backlit Keyboard 5",
+        "brand": "Bangla 2",
+        "availableQuantity": 20,
+        "isDelete": true,
+        "price": 79.99,
+        "rating": 4,
+        "description": "An ergonomic keyboard designed for comfort with wireless connectivity and long battery life.",
+        "__v": 0
+    }
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <h2>Delete Product</h2>
+            <div class="endpoint-details">
+                <h3>Endpoint</h3>
+                <code>{{LiveBaseURL}}/api/products/:id</code>
+                <h3>Request Method</h3>
+                <code>DELETE</code>
+                <h3>Response</h3>
+                <pre><code class="json">{
+    "success": true,
+    "statusCode": 201,
+    "message": "Product Delete Successfully",
+    "data": {
+        "_id": "66914fc8f1ed9dbc761c38f0",
+        "image": "https://example.com/image2.jpg",
+        "title": "RGB Backlit Keyboard 5",
+        "brand": "Bangla 2",
+        "availableQuantity": 20,
+        "isDelete": true,
+        "price": 79.99,
+        "rating": 4,
+        "description": "An ergonomic keyboard designed for comfort with wireless connectivity and long battery life.",
+        "__v": 0
+    }
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <h2>Get All Orders</h2>
+            <div class="endpoint-details">
+                <h3>Endpoint</h3>
+                <code>{{LiveBaseURL}}/api/order</code>
+                <h3>Request Method</h3>
+                <code>GET</code>
+                <h3>Response</h3>
+                <pre><code class="json">{
+    "success": true,
+    "statusCode": 200,
+    "message": "All Order Retrieved",
+    "data": [
+        {
+            "_id": "669151ccb1aa346e33d350df",
+            "name": "John Doe",
+            "email": "john.doe@example.com",
+            "phoneNumber": "+1234567890",
+            "orderItem": [
+                {
+                    "_id": "66914f73f1ed9dbc761c38ec",
+                    "image": "https://example.com/image3.jpg",
+                    "title": "Compact Mechanical Keyboard",
+                    "brand": "TechGear",
+                    "price": 59.99,
+                    "description": "A compact mechanical keyboard with a sleek design, perfect for small desks and gaming setups."
+                },
+                {
+                    "_id": "66914fb7f1ed9dbc761c38ee",
+                    "image": "https://example.com/image1.jpg",
+                    "title": "Mechanical Gaming Keyboard",
+                    "brand": "KeyMaster",
+                    "price": 99.99,
+                    "description": "A high-performance mechanical keyboard with RGB lighting and programmable keys."
+                }
+            ],
+            "status": "confirmed",
+            "deliveryAddress": {
+                "street": "123 Main St",
+                "city": "Anytown",
+                "state": "CA",
+                "zipCode": "12345",
+                "country": "USA"
+            },
+            "__v": 0
+        }
+    ]
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <h2>Add New Order</h2>
+            <div class="endpoint-details">
+                <h3>Endpoint</h3>
+                <code>{{LiveBaseURL}}/api/order</code>
+                <h3>Request Method</h3>
+                <code>POST</code>
+                <h3>Request Body</h3>
+                <pre><code class="json">{
+    "name": "Jane Doe",
+    "email": "jane.doe@example.com",
+    "phoneNumber": "+1987654321",
+    "orderItem": [
+        {
+            "productId": "66914f73f1ed9dbc761c38ec",
+            "quantity": 2
+        },
+        {
+            "productId": "66914fb7f1ed9dbc761c38ee",
+            "quantity": 1
+        }
+    ],
+    "status": "pending",
+    "deliveryAddress": {
+        "street": "456 Elm St",
+        "city": "New City",
+        "state": "NY",
+        "zipCode": "54321",
+        "country": "USA"
+    }
+}</code></pre>
+                <h3>Response</h3>
+                <pre><code class="json">{
+    "success": true,
+    "statusCode": 201,
+    "message": "Order Placed Successfully",
+    "data": {
+        "_id": "669151e1b1aa346e33d350e2",
+        "name": "Jane Doe",
+        "email": "jane.doe@example.com",
+        "phoneNumber": "+1987654321",
+        "orderItem": [
+            {
+                "_id": "66915204b1aa346e33d350e5",
+                "productId": "66914f73f1ed9dbc761c38ec",
+                "quantity": 2
+            },
+            {
+                "_id": "66915204b1aa346e33d350e6",
+                "productId": "66914fb7f1ed9dbc761c38ee",
+                "quantity": 1
+            }
+        ],
+        "status": "pending",
+        "deliveryAddress": {
+            "street": "456 Elm St",
+            "city": "New City",
+            "state": "NY",
+            "zipCode": "54321",
+            "country": "USA"
+        },
+        "__v": 0
+    }
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <h2>Update Order Status</h2>
+            <div class="endpoint-details">
+                <h3>Endpoint</h3>
+                <code>{{LiveBaseURL}}/api/order/:id</code>
+                <h3>Request Method</h3>
+                <code>PUT</code>
+                <h3>Request Body</h3>
+                <pre><code class="json">{
+    "status": "confirmed"
+}</code></pre>
+                <h3>Response</h3>
+                <pre><code class="json">{
+    "success": true,
+    "statusCode": 200,
+    "message": "Order Updated Successfully",
+    "data": {
+        "_id": "669151ccb1aa346e33d350df",
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "phoneNumber": "+1234567890",
+        "orderItem": [
+            {
+                "_id": "66914f73f1ed9dbc761c38ec",
+                "image": "https://example.com/image3.jpg",
+                "title": "Compact Mechanical Keyboard",
+                "brand": "TechGear",
+                "price": 59.99,
+                "description": "A compact mechanical keyboard with a sleek design, perfect for small desks and gaming setups."
+            },
+            {
+                "_id": "66914fb7f1ed9dbc761c38ee",
+                "image": "https://example.com/image1.jpg",
+                "title": "Mechanical Gaming Keyboard",
+                "brand": "KeyMaster",
+                "price": 99.99,
+                "description": "A high-performance mechanical keyboard with RGB lighting and programmable keys."
+            }
+        ],
+        "status": "confirmed",
+        "deliveryAddress": {
+            "street": "123 Main St",
+            "city": "Anytown",
+            "state": "CA",
+            "zipCode": "12345",
+            "country": "USA"
+        },
+        "__v": 0
+    }
+}</code></pre>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

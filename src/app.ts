@@ -4,7 +4,7 @@ import router from "./app/routes";
 import httpStatus from "http-status";
 import globalErrorHandaler from "./app/middlewares/globalErrorHandaler";
 import AppError from "./app/errors/AppError";
-import config from "./app/config";
+import path from "path";
 
 
 
@@ -16,14 +16,18 @@ app.use(cors());
 // app.use(cors({ origin: ['http://localhost:5173'], credentials: true }));
 
 
+// application documentation
+const publicDir = path.join(__dirname, 'app', 'public');
+app.use(express.static(publicDir));
+
+
+app.get("/", (req: Request, res: Response) => {
+    res.sendFile(path.join(publicDir, 'index.html'));
+});
+
 // application route 
 
 app.use("/api", router)
-
-app.get("/", (req: Request, res: Response) => {
-    res.json(`keyboard server is running port: ${config.port ?? process.env.PORT}`)
-})
-
 
 
 // Error handling for unhandled routes

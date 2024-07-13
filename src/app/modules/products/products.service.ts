@@ -28,9 +28,15 @@ const getAllProductFromDb = async (search: string, minPrice: number | null, maxP
         sortOption.price = -1;
     }
 
-    const result = await ProductsModal.find(query).sort(sortOption).select({isDelete: false});
+    const result = await ProductsModal.find(query).sort(sortOption).select({ isDelete: false });
     return result;
 };
+
+
+const getSingleProductFromDb = async (productId: string) => {
+    const result = await ProductsModal.findById(productId)
+    return result
+}
 
 
 
@@ -54,6 +60,7 @@ const deleteProductFromDb = (prductId: string) => {
 
 export const ProductService = {
     getAllProductFromDb,
+    getSingleProductFromDb,
     addNewProductInDb,
     updateProductInDb,
     deleteProductFromDb

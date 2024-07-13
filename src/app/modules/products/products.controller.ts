@@ -34,6 +34,41 @@ const getAllProducts: RequestHandler = async (req, res, next) => {
     }
 }
 
+const getSingleProduct: RequestHandler = async (req, res, next) => {
+    try {
+        const { productId } = req.params;
+
+        if (!productId) {
+            return sendResponse(res, {
+                success: false,
+                statusCode: httpStatus.BAD_REQUEST,
+                message: 'Product ID is required',
+                data: null,
+            });
+        }
+
+        const product = await ProductService.getSingleProductFromDb(productId as string);
+
+        if (!product) {
+            return sendResponse(res, {
+                success: false,
+                statusCode: httpStatus.NOT_FOUND,
+                message: 'Product not found',
+                data: null,
+            });
+        }
+
+        sendResponse(res, {
+            success: true,
+            statusCode: httpStatus.OK,
+            message: 'Single Product Retrieved',
+            data: product,
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
 
 const addNewProduct: RequestHandler = async (req, res, next) => {
 
@@ -104,6 +139,7 @@ const deleteProduct: RequestHandler = async (req, res, next) => {
 
 export const ProductController = {
     getAllProducts,
+    getSingleProduct,
     addNewProduct,
     updateProduct,
     deleteProduct

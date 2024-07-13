@@ -9,6 +9,9 @@ const router = Router()
 // get all products 
 router.get("/", ProductController.getAllProducts)
 
+// get single products 
+router.get("/:productId", ProductController.getSingleProduct)
+
 // post products 
 router.post("/", validateRequest(ProductValidation.ProductValidationSchema, "body"), ProductController.addNewProduct)
 
